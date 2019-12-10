@@ -2,7 +2,7 @@
 
 import sys
 import copy
-import itertools as it
+import itertools
 
 
 def get_param(arr, idx, mode):
@@ -71,7 +71,7 @@ def get_output(arr_copy, input1, input2):
 
 def main():
     arr = [int(x) for x in sys.stdin.readline().strip().split(",")]
-    perms = list(it.permutations(range(5)))
+    perms = list(itertools.permutations(range(5)))
     max_signal = -10e9
     for perm in perms:
         for idx, ipt in enumerate(perm):

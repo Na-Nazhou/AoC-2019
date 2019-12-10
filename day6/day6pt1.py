@@ -17,7 +17,7 @@ def main():
     for child, parent in p.items():
         count = 0
         curr = parent
-        while curr:
+        while curr is not None:
             count += 1
             curr = p[curr]
         total += count
