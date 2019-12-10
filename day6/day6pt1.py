@@ -7,9 +7,7 @@ def main():
     p = {}
     total = 0
     for edge in sys.stdin:
-        vertices = edge.strip().split(")")
-        v1 = vertices[0]
-        v2 = vertices[1]
+        v1, v2 = edge.strip().split(")")
         if v1 not in p.keys():
             p[v1] = None
         p[v2] = v1

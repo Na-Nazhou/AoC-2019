@@ -35,9 +35,7 @@ def bfs(graph, src, dest):
 def main():
     graph = {}
     for edge in sys.stdin:
-        vertices = edge.strip().split(")")
-        v1 = vertices[0]
-        v2 = vertices[1]
+        v1, v2 = edge.strip().split(")")
         add_neighbor(v1, v2, graph)
         add_neighbor(v2, v1, graph)
         if v2 == 'YOU':  # additional input
