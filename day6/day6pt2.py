@@ -40,11 +40,11 @@ def main():
         v2 = vertices[1]
         add_neighbor(v1, v2, graph)
         add_neighbor(v2, v1, graph)
-        if v2 == 'YOU':
+        if v2 == 'YOU':  # additional input
             src = v1
-        elif v2 == 'SAN':
+        elif v2 == 'SAN':  # additional input
             dest = v1
-    print(bfs(graph, src, dest))
+    print(bfs(graph, src, dest))  # output
 
 
 if __name__ == "__main__":
