@@ -59,8 +59,13 @@ def main():
     white_tiles = set()
     painted = set()
     curr = [0, 0]
+    white_tiles.add(tuple(curr))
     isFirst = True
     face = 0
+    min_x = 10e9
+    min_y = 10e9
+    max_x = -10e9
+    max_y = -10e9
     while True:
         opcode = memory[i]
         DE = opcode % 100
@@ -90,6 +95,10 @@ def main():
                 elif param1 == 0 and tuple(curr) in white_tiles:
                     white_tiles.remove(tuple(curr))
                 painted.add(tuple(curr))
+                min_x = min(min_x, curr[0])
+                min_y = min(min_y, curr[1])
+                max_x = max(max_x, curr[0])
+                max_y = max(max_y, curr[1])
             else:
                 if param1 == 1:
                     face = (face + 5) % 4
@@ -109,7 +118,13 @@ def main():
             param1 = get_param(memory, i + 1, C, base)
             base += param1
             i += 2
-    print(len(painted))
+    for j in range(max_y, min_y - 1, -1):
+        for i in range(min_x, max_x + 1):
+            if (i, j) in white_tiles:
+                print("*", end="")
+            else:
+                print(" ", end="")
+        print()
 
 
 if __name__ == "__main__":
