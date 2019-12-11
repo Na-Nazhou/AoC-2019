@@ -37,12 +37,30 @@ def get_jump(param, DE):
         return param == 0
 
 
+def update(curr, face):
+    directions = ['U', 'R', 'D', 'L']
+    direction = directions[face]
+    if direction == 'U':
+        curr[1] = curr[1] + 1
+    if direction == 'D':
+        curr[1] = curr[1] - 1
+    if direction == 'R':
+        curr[0] = curr[0] + 1
+    if direction == 'L':
+        curr[0] = curr[0] - 1
+
+
 def main():
     memory = {
         idx: int(value) for idx, value in enumerate(sys.stdin.readline().strip().split(","))
     }
     i = 0
     base = 0
+    white_tiles = set()
+    painted = set()
+    curr = [0, 0]
+    isFirst = True
+    face = 0
     while True:
         opcode = memory[i]
         DE = opcode % 100
@@ -61,11 +79,24 @@ def main():
             i += 4
         if DE == 3:
             param_idx = get_param_idx(memory, i + 1, C, base)
-            memory[param_idx] = int(input())  # additional input
+            ipt = int(tuple(curr) in white_tiles)
+            memory[param_idx] = ipt
             i += 2
         if DE == 4:
             param1 = get_param(memory, i + 1, C, base)
-            print(param1)  # output
+            if isFirst:
+                if param1 == 1:
+                    white_tiles.add(tuple(curr))
+                else:
+                    white_tiles.remove(tuple(curr))
+                painted.add(tuple(curr))
+            else:
+                if param1 == 1:
+                    face = (face + 5) % 4
+                elif param1 == 0:
+                    face = (face + 3) % 4
+                update(curr, face)
+            isFirst = not isFirst
             i += 2
         if DE in [5, 6]:
             param1 = get_param(memory, i + 1, C, base)
@@ -78,6 +109,7 @@ def main():
             param1 = get_param(memory, i + 1, C, base)
             base += param1
             i += 2
+    print(len(painted))
 
 
 if __name__ == "__main__":

@@ -38,7 +38,7 @@ def main():
         for i in range(length):
             update(curr, path)
             count += 1
-            if tuple(curr) in points.keys():
+            if tuple(curr) in points:
                 min_steps = min(points[tuple(curr)] + count, min_steps)
     print(min_steps)  # output
 

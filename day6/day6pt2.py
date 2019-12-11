@@ -5,23 +5,22 @@ import queue
 
 
 def add_neighbor(v1, v2, graph):
-    if v1 not in graph.keys():
-        graph[v1] = []
+    graph.setdefault(v1, [])
     graph[v1].append(v2)
 
 
 def bfs(graph, src, dest):
     p = {}
+    p.setdefault(src)
     q = queue.Queue()
     q.put(src)
-    p[src] = None
     while not q.empty():
         u = q.get()
         for neighbor in graph[u]:
-            if neighbor not in p.keys():
+            if neighbor not in p:
                 p[neighbor] = u
                 q.put(neighbor)
-        if dest in p.keys():
+        if dest in p:
             break
 
     count = 0

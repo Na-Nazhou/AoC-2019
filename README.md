@@ -8,4 +8,4 @@ Testing:
 
 `diff data.out expected1.out`
 
-Increments: Day **2, 5, 7, 9, 11**
+Increments: Day 2, 5, 7, 9, 11 (related to day 3)

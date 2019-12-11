@@ -8,8 +8,7 @@ def main():
     total = 0
     for edge in sys.stdin:
         v1, v2 = edge.strip().split(")")
-        if v1 not in p.keys():
-            p[v1] = None
+        p.setdefault(v1)
         p[v2] = v1
 
     for child, parent in p.items():
