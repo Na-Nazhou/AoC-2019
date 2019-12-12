@@ -109,7 +109,7 @@ def main():
             param1 = get_param(memory, i + 1, C, base)
             base += param1
             i += 2
-    print(len(painted))
+    print(len(painted))  # output
 
 
 if __name__ == "__main__":
