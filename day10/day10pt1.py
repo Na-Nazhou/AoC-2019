@@ -22,7 +22,7 @@ def get_degree(src, dest):
 def get_distance(src, dest):
     x_disp = dest[0] - src[0]
     y_disp = dest[1] - src[1]
-    return math.sqrt(x_disp * x_disp + y_disp * y_disp)
+    return math.sqrt(x_disp ** 2 + y_disp ** 2)
 
 
 def check(src, dest, arr):

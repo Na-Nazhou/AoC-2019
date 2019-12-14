@@ -9,13 +9,13 @@ import sys
 def update(curr, path):
     direction = path[0]
     if direction == 'U':
-        curr[1] = curr[1] + 1
+        curr[1] += 1
     if direction == 'D':
-        curr[1] = curr[1] - 1
+        curr[1] -= 1
     if direction == 'R':
-        curr[0] = curr[0] + 1
+        curr[0] += 1
     if direction == 'L':
-        curr[0] = curr[0] - 1
+        curr[0] -= 1
 
 
 def main():
