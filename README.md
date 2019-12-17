@@ -13,6 +13,7 @@ Increments: Day 2, 5, 7, 9, 11 (related to day 3 and day 8)
 ### Notes
 
 - functions
+  - In Python, function is first-class citizen
   - \*args: tuple
   - \*\*kwargs: dict
 - dictionary
@@ -22,6 +23,11 @@ Increments: Day 2, 5, 7, 9, 11 (related to day 3 and day 8)
   - for idx, elem in enumerate(list)
   - sorted(list)
   - list comprehension: create new list
+- set
+  - set1.intersection(set2)
+  - set1.difference(set2)
+  - set1.symmetric_difference(set2)
+  - set1.union(set2)
 - numpy
   - np.array(list)
   - element-wise calculation, subsetting
@@ -38,8 +44,9 @@ Increments: Day 2, 5, 7, 9, 11 (related to day 3 and day 8)
     - table.loc[[[label1, ...]]
 - generators
   - yield
+- exception handling
+  - try, except, raise
 - re
-
   - ^: at the begining of a line
   - |: OR operator
   - (): group
@@ -49,6 +56,68 @@ Increments: Day 2, 5, 7, 9, 11 (related to day 3 and day 8)
   - re.comple(regex): pattern
   - re.search(pattern, string): Match
   - re.match(pattern, string): boolean
+  - email pattern: r"\\"?([-a-zA-Z0-9.`?{}]+@\w+\\.\w+)\\"?"
+- data serialization
+  - json
+    - json.loads(json_string)
+    - json.dumps(object)
+  - others: pickle
+- functools
+  - functools.partial(funct, args)
+- code introspection
+  - help()
+  - dir()
+  - hasattr()
+  - id()
+  - type()
+  - repr()
+  - callable()
+  - issubclass()
+  - isinstance()
+  - \_\_doc\_\_
+  - \_\_name\_\_
+- Closure
+  - Nested functions can access the variables of the enclosing scope. However, they are readonly.
+  - Use `nonlocal` to modify them
+  - A function can return another function
+- Decorator
+  - bottom up
+  - @functools.wraps(func): preserve original function name and docstring
+  - Can be used to change input, change output, do checking
+  - datacamp.com/community/tutorials/decorators-python
+  - https://wiki.python.org/moin/PythonDecoratorLibrary
 
-- others
-  - dir, help
+```
+@decorator
+def function(arg):
+    return "value"
+```
+
+is equivalent to
+
+```
+def function(arg):
+    return "value"
+function = decorator(function)
+```
+
+Example:
+
+```
+import functools
+
+def decorator_maker_with_arguments(arg1, arg2, arg3):
+  def decorator(func):
+    @functools.wraps(func)
+    def wrapper(f_arg1, f_arg2):
+        return func().upper()
+    return wrapper
+  return decorator
+
+@decorator_maker_with_arguments(arg1, arg2, arg3)
+def say_hi(f_arg1, f_arg2):
+    "This will say hi"
+    return 'hello there'
+
+say_hi(f_arg1, f_arg2)
+```
