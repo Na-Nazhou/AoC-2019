@@ -2,9 +2,9 @@
 
 import sys
 
-# test1: python3 day12pt1.py 10 < test1.in
-# test2: python3 day12pt1.py 100 < test2.in
-# data: python3 day12pt1.py 1000 < data.in
+# test1: python3 day12pt1.py 10 < day12/test1.in
+# test2: python3 day12pt1.py 100 < day12/test2.in
+# actual data: python3 day12pt1.py 1000 < day12/data.in
 
 
 def extract(line):

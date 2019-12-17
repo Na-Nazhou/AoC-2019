@@ -1,6 +1,10 @@
-#!/usr/bin/env python3
-
 import sys
+
+
+def read():
+    return {
+        idx: int(value) for idx, value in enumerate(sys.stdin.readline().strip().split(","))
+    }
 
 
 def get_param_idx(memory, idx, mode, base):
@@ -37,10 +41,7 @@ def get_jump(param, DE):
         return param == 0
 
 
-def main():
-    memory = {
-        idx: int(value) for idx, value in enumerate(sys.stdin.readline().strip().split(","))
-    }
+def run(memory):
     i = 0
     base = 0
     while True:
@@ -78,7 +79,3 @@ def main():
             param1 = get_param(memory, i + 1, C, base)
             base += param1
             i += 2
-
-
-if __name__ == "__main__":
-    main()

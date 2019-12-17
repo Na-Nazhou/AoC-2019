@@ -1,71 +1,34 @@
 #!/usr/bin/env python3
 
-import sys
-
-
-def get_param_idx(memory, idx, mode, base):
-    if mode in [0, 2]:
-        if mode == 0:
-            offset = 0
-        elif mode == 2:
-            offset = base
-        return memory.get(idx, 0) + offset
-    elif mode == 1:
-        return idx
-
-
-def get_param(memory, idx, mode, base):
-    param_idx = get_param_idx(memory, idx, mode, base)
-    return memory.get(param_idx, 0)
-
-
-def get_result(param1, param2, DE):
-    if DE == 1:
-        return param1 + param2
-    elif DE == 2:
-        return param1 * param2
-    elif DE == 7:
-        return int(param1 < param2)
-    elif DE == 8:
-        return int(param1 == param2)
-
-
-def get_jump(param, DE):
-    if DE == 5:
-        return param != 0
-    elif DE == 6:
-        return param == 0
+from intcode.util import read
+from intcode.util import get_param_idx
+from intcode.util import get_param
+from intcode.util import get_result
+from intcode.util import get_jump
 
 
 def update(curr, face):
     directions = ['U', 'R', 'D', 'L']
     direction = directions[face]
     if direction == 'U':
-        curr[1] +=  1
+        curr[1] = curr[1] + 1
     if direction == 'D':
-        curr[1] -= 1
+        curr[1] = curr[1] - 1
     if direction == 'R':
-        curr[0] += 1
+        curr[0] = curr[0] + 1
     if direction == 'L':
-        curr[0] -= 1
+        curr[0] = curr[0] - 1
 
 
 def main():
-    memory = {
-        idx: int(value) for idx, value in enumerate(sys.stdin.readline().strip().split(","))
-    }
+    memory = read()
     i = 0
     base = 0
     white_tiles = set()
     painted = set()
     curr = [0, 0]
-    white_tiles.add(tuple(curr))
     isFirst = True
     face = 0
-    min_x = 10e9
-    min_y = 10e9
-    max_x = -10e9
-    max_y = -10e9
     while True:
         opcode = memory[i]
         DE = opcode % 100
@@ -95,10 +58,6 @@ def main():
                 elif param1 == 0 and tuple(curr) in white_tiles:
                     white_tiles.remove(tuple(curr))
                 painted.add(tuple(curr))
-                min_x = min(min_x, curr[0])
-                min_y = min(min_y, curr[1])
-                max_x = max(max_x, curr[0])
-                max_y = max(max_y, curr[1])
             else:
                 if param1 == 1:
                     face = (face + 5) % 4
@@ -118,13 +77,7 @@ def main():
             param1 = get_param(memory, i + 1, C, base)
             base += param1
             i += 2
-    for j in range(max_y, min_y - 1, -1):
-        for i in range(min_x, max_x + 1):
-            if (i, j) in white_tiles:
-                print("*", end="")
-            else:
-                print(" ", end="")
-        print()
+    print(len(painted))  # output
 
 
 if __name__ == "__main__":
