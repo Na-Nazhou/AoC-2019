@@ -2,6 +2,7 @@
 
 # list is unhashable
 # tuple is immutable
+# TODO: optimizaion
 
 import sys
 
