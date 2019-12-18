@@ -1,13 +1,14 @@
 #!/usr/bin/env python3
 
 from intcode.util import read
-from intcode.util import run
+from intcode.util import IntCodeComputer
 
 
 def main():
     memory = read()
-    run(memory)
-    print(memory[0])  # output
+    intcode = IntCodeComputer(memory)
+    intcode.run()
+    print(intcode.memory[0])  # output
 
 
 if __name__ == "__main__":

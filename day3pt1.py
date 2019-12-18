@@ -5,18 +5,7 @@
 # TODO: optimizaion
 
 import sys
-
-
-def update(curr, path):
-    direction = path[0]
-    if direction == 'U':
-        curr[1] += 1
-    if direction == 'D':
-        curr[1] -= 1
-    if direction == 'R':
-        curr[0] += 1
-    if direction == 'L':
-        curr[0] -= 1
+from intcode.util import update
 
 
 def main():
@@ -28,13 +17,13 @@ def main():
     for path in w1:
         length = int(path[1:])
         for i in range(length):
-            update(curr, path)
+            update(curr, path[0])
             points.add(tuple(curr))
     curr = [0, 0]  # reset the central port
     for path in w2:
         length = int(path[1:])
         for i in range(length):
-            update(curr, path)
+            update(curr, path[0])
             if tuple(curr) in points:
                 min_distance = min(abs(curr[0]) + abs(curr[1]), min_distance)
     print(min_distance)  # output
