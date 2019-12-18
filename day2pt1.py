@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 from intcode.util import read
-from intcode.util import IntCodeComputer
+from intcode.machine import IntCodeComputer
 
 
 def main():

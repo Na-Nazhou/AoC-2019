@@ -2,7 +2,7 @@
 
 from intcode.util import read
 from intcode.util import update
-from intcode.util import IntCodeComputer
+from intcode.machine import IntCodeComputer
 
 
 def main():

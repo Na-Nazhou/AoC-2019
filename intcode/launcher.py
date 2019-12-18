@@ -1,5 +1,5 @@
 from .util import read
-from .util import IntCodeComputer
+from .machine import IntCodeComputer
 
 
 def launch():
@@ -9,4 +9,4 @@ def launch():
     intcode.read(ipt)
     intcode.run()
     while not intcode.output.empty():
-        print(intcode.output.get())
+        print(intcode.output.get())  # output

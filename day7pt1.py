@@ -2,7 +2,7 @@
 
 import itertools
 from intcode.util import read
-from intcode.util import IntCodeComputer
+from intcode.machine import IntCodeComputer
 
 
 def main():
