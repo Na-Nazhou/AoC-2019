@@ -6,7 +6,9 @@ import sys
 def main():
     image = sys.stdin.readline().strip()
     arr = []
-    step = 25 * 6  # additional input
+    length = 25  # additional input
+    width = 6  # additional input
+    step = length * width
     min_zero = 10e9
     for i in range(0, len(image), step):
         temp = image[i:i + step]

@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 
 from intcode.util import read
-from intcode.util import update
-from intcode.machine import IntCodeComputer
+from intcode.IntCodeComputer import IntCodeComputer
+from util import update
 
 
 def main():
@@ -16,7 +16,6 @@ def main():
     directions = ['U', 'R', 'D', 'L']
     while not intcode.completed:
         intcode.run()
-
         while not intcode.output.empty():
             value = intcode.output.get()
             if turn_to_paint:
@@ -32,7 +31,6 @@ def main():
                     face = (face + 3) % 4
                 update(curr, directions[face])
             turn_to_paint = not turn_to_paint
-
         intcode.read(int(tuple(curr) in white_tiles))
 
     print(len(painted))  # output

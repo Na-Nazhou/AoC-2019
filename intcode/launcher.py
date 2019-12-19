@@ -1,10 +1,10 @@
 from .util import read
-from .machine import IntCodeComputer
+from .IntCodeComputer import IntCodeComputer
 
 
 def launch():
     memory = read()
-    ipt = int(input())
+    ipt = int(input())  # input
     intcode = IntCodeComputer(memory)
     intcode.read(ipt)
     intcode.run()

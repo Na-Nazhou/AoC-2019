@@ -5,7 +5,7 @@
 # TODO: optimizaion
 
 import sys
-from intcode.util import update
+from util import update
 
 
 def main():

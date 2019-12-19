@@ -1,12 +1,15 @@
 #!/usr/bin/env python3
 
 import sys
+from util import draw
 
 
 def main():
     image = sys.stdin.readline().strip()
     arr = []
-    step = 25 * 6  # additional input
+    length = 25  # additional input
+    width = 6  # additional input
+    step = length * width
     result = ['2' for i in range(step)]
     for i in range(0, len(image), step):
         temp = image[i:i + step]
@@ -17,12 +20,9 @@ def main():
             if result[idx] == '2' and digit != '2':
                 result[idx] = digit
 
-    for i in range(0, len(result), 25):
-        for ch in result[i: i + 25]:
-            if ch == '1':
-                print("*", end="")
-            else:
-                print(" ", end="")
+    for i in range(0, len(result), length):
+        for ch in result[i: i + length]:
+            draw(ch == '1')
         print()
 
 

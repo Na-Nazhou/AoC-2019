@@ -10,7 +10,7 @@ Testing:
 
 Increments: Day 2, 5, 7, 9, 11 (related to day 3 and day 8)
 
-### Notes
+### Python Notes
 
 - functions
   - In Python, function is first-class citizen
