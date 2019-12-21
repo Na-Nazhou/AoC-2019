@@ -1,20 +1,11 @@
 #!/usr/bin/env python3
 
 import sys
+from day12util import extract
 
 # test1: python3 day12pt1.py 10 < day12/test1.in
 # test2: python3 day12pt1.py 100 < day12/test2.in
 # actual data: python3 day12pt1.py 1000 < day12/data.in
-
-
-def extract(line):
-    end = 0
-    result = []
-    line = line.strip()[1:-1].split(", ")
-    for part in line:
-        arg, val = part.split("=")
-        result.append(int(val))
-    return result
 
 
 def main():
@@ -23,6 +14,7 @@ def main():
         pos = extract(line)
         moons.append([pos, [0, 0, 0]])
     for i in range(int(sys.argv[1])):
+        # update velocity
         for moon in moons:
             moon_pos = moon[0]
             for other in moons:
@@ -33,6 +25,7 @@ def main():
                             moon[1][axis] += 1
                         elif pos > other_pos[axis]:
                             moon[1][axis] -= 1
+        # update position
         for moon in moons:
             moon_velocity = moon[1]
             for axis, velocity in enumerate(moon_velocity):
