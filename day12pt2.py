@@ -31,6 +31,7 @@ def update_state(curr_state):
         moon[0] += moon[1]
 
 
+# assume always revert to the initial state
 def get_repeat(curr_state):
     history = dict()
     i = 0
