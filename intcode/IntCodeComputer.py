@@ -44,6 +44,15 @@ class IntCodeComputer:
     def read(self, value):
         self.input.put(value)
 
+    def copy(self):
+        copy = IntCodeComputer(self.memory)
+        copy.input = self.input
+        copy.output = self.output
+        copy.pc = self.pc
+        copy.base = self.base
+        copy.completed = self.completed
+        return copy
+
     def run(self):
         while not self.completed:
             opcode = self.memory[self.pc]
