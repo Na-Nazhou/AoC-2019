@@ -3,12 +3,10 @@ from intcode.util import read
 from intcode.IntCodeComputer import IntCodeComputer
 
 
-def bfs(memory):
-    walls = set()
+def bfs(src, memory):
     p = dict()
     q = queue.Queue()
-    intcode = IntCodeComputer(memory)
-    q.put(((0, 0), intcode))
+    q.put((src, IntCodeComputer(memory)))
 
     while not q.empty():
         u, intcode = q.get()
@@ -22,9 +20,7 @@ def bfs(memory):
                 copy.run()
                 while not copy.output.empty():
                     status = copy.output.get()
-                    if status == 0:
-                        walls.add(neighbor)
-                    elif status == 2:
+                    if status == 2:
                         return (neighbor, p)
                     elif status == 1:
                         q.put((neighbor, copy))
@@ -32,10 +28,11 @@ def bfs(memory):
 
 def main():
     memory = read()
-    dest, p = bfs(memory)
+    src = (0, 0)
+    dest, p = bfs(src, memory)
     count = 0
     curr = dest
-    while curr != (0, 0):
+    while curr != src:
         count += 1
         curr = p[curr]
     print(count)
