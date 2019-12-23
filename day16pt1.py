@@ -3,38 +3,64 @@ import math
 
 # test1: python3 day16pt1.py 4 < day16/test1.in
 # test2: python3 day16pt1.py 100 < day16/test2.in
-# test2: python3 day16pt1.py 100 < day16/test3.in
-# test2: python3 day16pt1.py 100 < day16/test4.in
+# test3: python3 day16pt1.py 100 < day16/test3.in
+# test4: python3 day16pt1.py 100 < day16/test4.in
 # actual data: python3 day16pt1.py 100 < day16/data.in
 
 
-def get_pattern(base, phase, length):
-    result = []
+def process(curr_index, length, index, repeat):
+    lst = []
     counter = 0
-    curr = 0
-    while len(result) < length + 1:
-        result.append(base[curr])
+    while curr_index < length:
+        lst.append(curr_index)
         counter += 1
-        if counter == phase:
+        if counter == index + 1:
+            curr_index += (repeat - counter + 1)
             counter = 0
-            curr = (curr + 1) % len(base)
-    return result[1:]
+        else:
+            curr_index += 1
+    return lst
+
+
+def get_pattern(index, length, mem):
+    if index in mem:
+        return mem[index]
+
+    repeat = (index + 1) * 4
+    plus_start = index
+    minus_start = 3 * index + 2
+    plus = process(plus_start, length, index, repeat)
+    minus = process(minus_start, length, index, repeat)
+    mem[index] = (plus, minus)
+    return (plus, minus)
+
+
+def get_digit(index, phase, input_list, pattern_mem, mem):
+    if (phase, index) in mem:
+        return mem[(phase, index)]
+
+    if phase == 0:
+        result = input_list[index]
+    else:
+        plus, minus = get_pattern(index, len(input_list), pattern_mem)
+        result = 0
+        for idx in plus:
+            result += get_digit(idx, phase - 1, input_list, pattern_mem, mem)
+        for idx in minus:
+            result -= get_digit(idx, phase - 1, input_list, pattern_mem, mem)
+        result = abs(result) % 10
+    mem[(phase, index)] = result
+    return result
 
 
 def main():
-    base_pattern = [0, 1, 0, -1]
     input_list = [int(i) for i in sys.stdin.read().strip()]
-    for i in range(int(sys.argv[1])):
-        output = []
-        for idx in range(len(input_list)):
-            result = 0
-            pattern = get_pattern(base_pattern, idx + 1, len(input_list))
-            for i, val in enumerate(input_list):
-                result += val * pattern[i]
-            output.append(abs(result) % 10)
-        input_list = output
-
-    print("".join([str(i) for i in input_list])[:8])
+    mem = {}
+    pattern_mem = {}
+    for i in range(8):
+        print(
+            str(get_digit(i, int(sys.argv[1]), input_list, pattern_mem, mem)), end="")
+    print()
 
 
 if __name__ == "__main__":
