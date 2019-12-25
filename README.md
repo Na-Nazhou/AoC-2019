@@ -8,7 +8,7 @@ Testing:
 
 `diff data.out day1/expected1.out`
 
-Increments: Day 2, 5, 7, 9, 11 (related to day 3 and day 8)
+Increments: Day 2, 5, 7, 9, 11 (related to day 3 and day 8), 13, 15, 17
 
 ### Python Notes
 
